@@ -61,6 +61,10 @@
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a>
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Privacy" ? "active" : "")" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Employe" ? "active" : "")" asp-controller="Home" asp-action="Employe">Employee List</a>
+
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")"
+                   asp-controller="Home" asp-action="About">About</a>
+
             </nav>
         </div>
 
