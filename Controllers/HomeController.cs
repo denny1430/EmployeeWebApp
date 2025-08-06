@@ -18,7 +18,10 @@ namespace Employewebapp.Controllers
             _context = context;
         }
 
-        
+        public IActionResult About()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
