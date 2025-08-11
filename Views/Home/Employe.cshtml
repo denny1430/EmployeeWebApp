@@ -1,61 +1,81 @@
-﻿@model IEnumerable<CreateEmployee>
+﻿@model X.PagedList.IPagedList<Employewebapp.Models.CreateEmployee>
+@using Azure.Core
+@using X.PagedList.Mvc.Core
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Employee Details</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    <title>Employee Details</title>
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <!-- ✅ Include Bootstrap (optional if already included in your layout) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Employe</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone </th>
-                <th>Salary</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var emp in Model)
+    <div class="container mt-4">
+        <h2 class="mb-4">Employee</h2>
+        <form asp-action="Employe" method="get" class="form-inline mb-3">
+            <div class="input-group">
+                <input type="text" name="searchString" value="@Context.Request.Query["searchString"]" class="form-control" placeholder="Search by name..." />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
 
-{
-    <tr>
-            <td>@emp.Id</td>
 
-        <td>@emp.Name</td>
-        <td>@emp.Phone</td>
-        <td>@emp.Salary</td>
-        <td>@emp.Description</td>
-        <td>
-                        <a asp-action="CreateEmployee" asp-route-id="@emp.Id">Edit</a>
-                        <a asp-action="DeleteEmployee" asp-route-id="@emp.Id">Delete</a>
-        </td>
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Salary</th>
+                    <th>Description</th>
+                    <th>Action</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td>@emp.Id</td>
+                        <td>@emp.Name</td>
+                        <td>@emp.Phone</td>
+                        <td>@emp.Salary</td>
+                        <td>@emp.Description</td>
+                        <td>
+                            <a asp-action="CreateEmployee" asp-route-id="@emp.Id" class="btn btn-sm btn-primary me-1">Edit</a>
+                            <a asp-action="DeleteEmployee" asp-route-id="@emp.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-            }     
-            
-        </tbody>
-    </table>
+        <!-- ✅ Stylish Bootstrap Pagination -->
+        <nav aria-label="Page navigation">
+            @Html.PagedListPager(
+            Model,
+            page => Url.Action("Employe", new { page, searchString = Context.Request.Query["searchString"] }),
+                        new PagedListRenderOptions
+                        {
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" },
+                            UlElementClasses = new[] { "pagination", "justify-content-center" },
+                            ActiveLiElementClass = "active",
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                            DisplayLinkToIndividualPages = true,
+                            LinkToPreviousPageFormat = "Previous",
+                            LinkToNextPageFormat = "Next"
+                        })
+        </nav>
+
+    </div>
 </body>
 </html>
-

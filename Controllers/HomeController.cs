@@ -1,10 +1,15 @@
 using Employewebapp.Models;
+using X.PagedList;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using X.PagedList.Extensions;
+
+
 
 namespace Employewebapp.Controllers
 {
@@ -25,17 +30,18 @@ namespace Employewebapp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var employees = _context.Employees
+        .OrderBy(e => e.Id)
+        .ToList();
+
+            return View(employees);
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-        public IActionResult About()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -101,26 +107,28 @@ namespace Employewebapp.Controllers
             return View("CreateEmployee", emp);
         }
 
-        public IActionResult Employe()
+        public async Task<IActionResult> Employe(string searchString, int page = 1)
         {
-    //        List<Employe> emplist = new List<Employe>
-    //        {
-    //new Employe { Name = "Sai", Id = 20, Phone = 709382, Salary = 50000, Description = "Senior software" },
-    //new Employe { Name = "Reyansh", Id = 21, Phone = 709381, Salary = 60000, Description = "Manager"  },
-    //new Employe { Name = "Gopi", Id = 22, Phone = 709383, Salary = 70000, Description = "Tech lead"  }
-    //    };
+            int pageSize = 2;
 
-            var emplist = _context.Employees.ToList();
-            // emp = new Employe();
-            //emp.Id = 20;
-            //emp.Name = "Sai";
-            //emp.Salary = 2000000;
-            //emp.Phone = 891962;
-            //emp.Description = "Senior software engineer";
-            return View(emplist);
+            var employeesQuery = _context.Employees.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                employeesQuery = employeesQuery
+                    .Where(e => e.Name.Contains(searchString));
+            }
+
+            var pagedList = employeesQuery
+             .OrderBy(e => e.Id)
+              .ToPagedList(page, pageSize);
+
+            return View(pagedList);
         }
-       
-        
+
+
+
+
     }
 }
     

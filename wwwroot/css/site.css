@@ -177,4 +177,91 @@ body {
     .navbar {
         flex-wrap: wrap;
     }
+    /* Container styling */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+}
+
+/* Heading styling */
+.home-welcome {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+.home-welcome span {
+    background: linear-gradient(to right, #00cec9, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Buttons container */
+.home-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Base glass button */
+.btn-glass {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Purple gradient button */
+.btn-purple {
+    border: 2px solid rgba(108,92,231,0.4);
+}
+
+/* Green gradient button */
+.btn-green {
+    border: 2px solid rgba(0,206,201,0.4);
+}
+
+/* Hover effects */
+.btn-glass:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* Button icon spacing */
+.btn-glass i {
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .home-welcome {
+        font-size: 2rem;
+    }
+    .btn-glass {
+        width: 100%;
+        justify-content: center;
+    }
+
+  }
+
+
+
 }

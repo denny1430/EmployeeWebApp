@@ -1,20 +1,16 @@
-﻿@{
-    ViewData["Title"] = "About";
-}
-
-<div class="container mt-4">
+﻿<div class="container mt-4 fade-slide-in">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h1 class="text-center mb-4 text-primary"><i class="bi bi-briefcase-fill"></i> Employee Management Web Application</h1>
+            <h1 class="text-center mb-4 text-primary animate-pop"><i class="bi bi-briefcase-fill"></i> Employee Management Web Application</h1>
 
             <p class="lead text-secondary">
                 The <strong>Employeewebapp</strong> is a modern, role-based employee management system built using <strong>ASP.NET Core MVC</strong>. It provides a complete workflow for user authentication, employee CRUD operations, password management, and access control based on user roles (<strong>Admin</strong>/<strong>User</strong>).
-</p>
+            </p>
 
             <hr />
 
             <h4 class="text-dark mt-4"><i class="bi bi-stars"></i> Key Features</h4>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush animated-list">
                 <li class="list-group-item">
                     <strong>✅ User Authentication & Authorization</strong><br />
                     - Custom Login, Registration, and Logout using cookie-based authentication.<br />
@@ -40,30 +36,31 @@
                     <strong>📄 Informational Pages</strong><br />
                     - Home, Privacy, and About pages.
                 </li>
-</ul>
+            </ul>
 
             <h4 class="text-dark mt-5"><i class="bi bi-tools"></i> Technologies Used</h4>
             <div class="row row-cols-2 row-cols-md-3 g-3 mt-2">
-                @foreach (var tech in new[] {
-                                "ASP.NET Core MVC (.NET 6/7)",
-                                "Entity Framework Core",
-                                "SQL Server / SQLite",
-                                "Bootstrap 5",
-                                "C#",
-                                "Razor Views",
-                                "LINQ",
-                                "Cookie Authentication"
-                                })
+                @foreach (var tech in new[]
+                {
+                    "ASP.NET Core MVC (.NET 6/7)",
+                    "Entity Framework Core",
+                    "SQL Server / SQLite",
+                    "Bootstrap 5",
+                    "C#",
+                    "Razor Views",
+                    "LINQ",
+                    "Cookie Authentication"
+                })
                 {
                     <div class="col">
-                        <div class="alert alert-light border shadow-sm d-flex align-items-center">
+                        <div class="alert alert-light border shadow-sm d-flex align-items-center animate-zoom">
                             <i class="bi bi-check-circle-fill text-success me-2"></i> @tech
                         </div>
                     </div>
                 }
             </div>
 
-            <h5 class="text-muted text-center mt-4">Built with ❤️ using ASP.NET Core MVC</h5>
+            <h5 class="text-muted text-center mt-4 fade-in">Built with ❤️ using ASP.NET Core MVC</h5>
         </div>
     </div>
 </div>

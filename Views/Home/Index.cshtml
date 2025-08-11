@@ -1,14 +1,28 @@
-﻿@{
+﻿@model IEnumerable<CreateEmployee>
+
+@{
     ViewData["Title"] = "Home Page";
-    
 }
 
+<div class="text-center mt-5">
+    <h1 class="home-welcome">
+        Welcome, @TempData["EmployeeName"]?.ToString()
+    </h1>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome,  @TempData["EmployeeName"]?.ToString() </h1>
-    <a class="btn btn-primary" asp-controller="Home" asp-action="Employe">EMPLOYEE LIST</a>
-    @if (User.IsInRole("Admin"))
-    {
-        <a class="btn btn-primary" asp-controller="Home" asp-action="CreateEmployee">Add Employee</a>
-    }
+
+    <div class="home-buttons">
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Employe">
+            <i class="bi bi-people-fill me-1"></i> Employee List
+        </a>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="CreateEmployee">
+                <i class="bi bi-plus-circle-fill me-1"></i> Add Employee
+            </a>
+        }
+    </div>
 </div>
+
+<!-- Employee List Section -->
+@await Html.PartialAsync("_Emplist", Model)
