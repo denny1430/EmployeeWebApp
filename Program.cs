@@ -1,3 +1,4 @@
+using Employewebapp.Filters;
 using Employewebapp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,13 @@ namespace Employewebapp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<LogActionFilter>(); // Add globally
+            });
+            builder.Services.AddScoped<LogActionFilter>();
+
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<Employeedbcontext>(options => 
             options.UseInMemoryDatabase("EmployeDB")

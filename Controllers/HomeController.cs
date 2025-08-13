@@ -1,18 +1,19 @@
+using Employewebapp.Filters;
 using Employewebapp.Models;
-using X.PagedList;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using X.PagedList;
 using X.PagedList.Extensions;
 
 
 
 namespace Employewebapp.Controllers
 {
+    [ServiceFilter(typeof(LogActionFilter))]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,12 +31,29 @@ namespace Employewebapp.Controllers
 
         public IActionResult Index()
         {
+
             var employees = _context.Employees
         .OrderBy(e => e.Id)
         .ToList();
+            if (employees.Count < 5)
+            {
+                var log = new Logviewmodel
+                {
+                    Remarks = $"There are {employees.Count} employees in the database.",
+                    TimeStamp = DateTime.Now,
+                    UserName = User.Identity?.Name ?? "System",
+                    Severity = "Info"
+                };
+                _context.Logviewmodel.Add(log);
+                _context.SaveChanges();
+
+                // Store in memory, DB, or write to console
+                Console.WriteLine($"[{log.TimeStamp}] {log.UserName} - {log.Remarks}");
+            }
 
             return View(employees);
         }
+        
 
         public IActionResult Privacy()
         {

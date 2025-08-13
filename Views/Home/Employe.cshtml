@@ -34,7 +34,10 @@
                     <th>Phone</th>
                     <th>Salary</th>
                     <th>Description</th>
-                    <th>Action</th>
+                     @if (User.IsInRole("Admin")) // <-- only Admin sees Actions header
+                    {
+                        <th>Action</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -46,10 +49,13 @@
                         <td>@emp.Phone</td>
                         <td>@emp.Salary</td>
                         <td>@emp.Description</td>
+                        @if (User.IsInRole("Admin")) // <-- only Admin sees buttons
+                         {
                         <td>
                             <a asp-action="CreateEmployee" asp-route-id="@emp.Id" class="btn btn-sm btn-primary me-1">Edit</a>
                             <a asp-action="DeleteEmployee" asp-route-id="@emp.Id" class="btn btn-sm btn-danger">Delete</a>
                         </td>
+                         }
                     </tr>
                 }
             </tbody>
