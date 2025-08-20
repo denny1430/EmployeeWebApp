@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using X.PagedList;
 using X.PagedList.Extensions;
+using Employewebapp.Filters;
 
 
 
@@ -23,6 +24,64 @@ namespace Employewebapp.Controllers
             _logger = logger;
             _context = context;
         }
+        [ServiceFilter(typeof(LogExceptionFilter))]
+        public IActionResult Crash()
+        {
+            var employees = _context.Employees
+    .OrderBy(e => e.Id)
+    .ToList();
+
+            if (employees.Count < 5)
+            {
+                var exceptionLog = new ExceptionLog
+                {
+                    ActionName= $"There are only {employees.Count} employees in the database.",
+                    LogTime = DateTime.Now,
+                    UserName = User.Identity?.Name ?? "System",
+                    Severity = "Info",
+                    StackTrace = null // Optional, only if your ExceptionLog model has it
+                };
+
+                _context.ExceptionLogs.Add(exceptionLog);
+                _context.SaveChanges();
+
+                // Optional: also write to console or file
+                Console.WriteLine($"[{exceptionLog.LogTime}] {exceptionLog.UserName} - {exceptionLog.Severity}");
+            }
+
+            return View(employees);
+        }
+
+        //    try
+        //    {
+        //        // Force an exception
+        //        throw new Exception("Test exception logging");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var log = new ExceptionLog
+        //        {
+        //            ControllerName = nameof(HomeController),
+        //            ActionName = nameof(Crash),
+        //            ExceptionMessage = ex.Message,
+        //            StackTrace = ex.StackTrace,
+        //            LogTime = DateTime.Now,
+        //            UserName = User.Identity?.Name ?? "System",
+        //            Severity = "Error",
+        //            Remarks = $"An error occurred in {nameof(Crash)}: {ex.Message}"
+        //        };
+
+            //        _context.ExceptionLogs.Add(log);
+            //        _context.SaveChanges();
+
+            //        // Console log for debugging (optional)
+            //        Console.WriteLine($"[{log.LogTime}] {log.UserName} - {log.Remarks}");
+            //    }
+
+            //    return View("Error");
+            //}
+
+
 
         public IActionResult About()
         {

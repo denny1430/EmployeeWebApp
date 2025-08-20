@@ -3,6 +3,7 @@ using Employewebapp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Employewebapp
 {
     public class Program
@@ -10,6 +11,11 @@ namespace Employewebapp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+           
+            
+
+            // Add LogExceptionFilter so it can be injected
+            builder.Services.AddScoped<ExceptionLog>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews(options =>

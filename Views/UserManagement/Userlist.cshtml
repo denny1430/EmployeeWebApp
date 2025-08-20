@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Employewebapp.Models.User>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<style>
+    /* Custom zebra striping with pastel shades */
+    .custom-table tbody tr:nth-child(odd) {
+        background-color: #fdf7ff; /* soft lavender */
+    }
+
+    .custom-table tbody tr:nth-child(even) {
+        background-color: #f9f9ff; /* soft bluish white */
+    }
+
+    .custom-table tbody tr:hover {
+        background-color: #e9f5ff; /* light sky blue on hover */
+        transform: scale(1.01);
+        transition: all 0.2s ease-in-out;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <!-- Gradient Header -->
+        <div class="card-header text-center py-3" style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
+            <h3 class="fw-bold mb-0 text-white">
+                <i class="bi bi-people-fill me-2"></i> User List
+            </h3>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-bordered table-hover align-middle shadow-sm rounded-3 overflow-hidden custom-table">
+                <thead style="background: #f1f3f5;">
+                    <tr class="text-center text-dark fw-semibold">
+                        <th style="width:10%;">ID</th>
+                        <th style="width:30%;">Name</th>
+                        <th style="width:40%;">Email</th>
+                        <th style="width:20%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td class="text-center fw-semibold">@user.Id</td>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td class="text-center">
+                                <a asp-controller="User" asp-action="ManageRole" asp-route-id="@user.Id" 
+                                class="btn btn-sm btn-primary me-2">
+                                         Manage Role
+                                        </a>
+                                         <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id" 
+                                                class="btn btn-sm btn-danger">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

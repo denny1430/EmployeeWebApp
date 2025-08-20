@@ -116,6 +116,11 @@
                 
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Employe" ? "active" : "")"
                    asp-controller="Home" asp-action="Employe">Employee List</a>
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Userlist" ? "active" : "")"
+                   asp-controller="User" asp-action="Userlist">
+                    User Management
+                </a>
+
 
             </nav>
         </div>

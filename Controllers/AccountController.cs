@@ -41,7 +41,7 @@ namespace Employeewebapp.Controllers
                     Name = model.Name,
                     Email = model.Email,
                     Password = model.Password,
-                    RoleId = model.IsAdmin ? 1:2
+                    RoleId = model.IsAdmin ? 1 : 2
                 };
 
                 _context.Users.Add(user);
@@ -167,7 +167,7 @@ namespace Employeewebapp.Controllers
             TempData["Message"] = "Password reset successful. Please login.";
             return RedirectToAction("Login");
         }
-      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -176,8 +176,11 @@ namespace Employeewebapp.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        
 
+       
 
     }
 }
+ 
 
