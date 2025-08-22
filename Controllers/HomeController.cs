@@ -92,8 +92,8 @@ namespace Employewebapp.Controllers
         {
 
             var employees = _context.Employees
-        .OrderBy(e => e.Id)
-        .ToList();
+            .OrderBy(e => e.Id)
+            .ToList();
             if (employees.Count < 5)
             {
                 var log = new Logviewmodel
@@ -109,10 +109,10 @@ namespace Employewebapp.Controllers
                 // Store in memory, DB, or write to console
                 Console.WriteLine($"[{log.TimeStamp}] {log.UserName} - {log.Remarks}");
             }
-
+            ViewBag.LoggedUser = User.Identity?.Name ?? "Guest";
             return View(employees);
+
         }
-        
 
         public IActionResult Privacy()
         {

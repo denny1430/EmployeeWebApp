@@ -1,4 +1,7 @@
-﻿@* Views/Shared/_Layout.cshtml *@
+﻿
+
+
+@* Views/Shared/_Layout.cshtml *@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +60,25 @@
             </div>
         </div>
     </nav>
+    <div class="d-flex flex-column p-3 bg-light" style="width: 250px; height: 100vh;">
+        <h5 class="mb-4">Employeewebapp</h5>
+
+        <!-- Home Dropdown Menu -->
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle w-100 text-start" type="button" id="homeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Home
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="homeDropdown">
+                <li><a class="dropdown-item" href="/Home/Privacy">Privacy</a></li>
+                <li><a class="dropdown-item" href="/Home/About">About</a></li>
+            </ul>
+        </div>
+
+        <!-- Other Static Buttons -->
+        <a href="/Employee/List" class="btn btn-light w-100 text-start mt-2">Employee List</a>
+        <a href="/User/UserList" class="btn btn-light w-100 text-start mt-2 fw-bold">User Management</a>
+    </div>
+
 
     <!-- Layout Wrapper -->
     <div class="layout-wrapper">
@@ -65,9 +87,9 @@
             <nav class="nav flex-column">
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a>
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Privacy" ? "active" : "")" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")"asp-controller="Home" asp-action="About">About</a>
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Employee" ? "active" : "")" asp-controller="Home" asp-action="Employe">Employee List</a>
                 <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "UserManagement" ? "active" : "")" asp-controller="User" asp-action="Userlist">UserManagement</a>
-                <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")"asp-controller="Home" asp-action="About">About</a>
 
             </nav>
         </div>

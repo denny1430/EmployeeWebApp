@@ -83,7 +83,8 @@ namespace Employeewebapp.Controllers
 
                     //    return View("Index", model);
                     TempData["EmployeeName"] = user.Name;
-                    return RedirectToAction("Index", "Home");
+
+                        return RedirectToAction("Index", "Home");
 
                 }
 

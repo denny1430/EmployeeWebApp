@@ -17,5 +17,6 @@ namespace Employewebapp.Models
         public Empdbcontext(DbContextOptions options) : base(options)
         {
         }
+       
     }
 }

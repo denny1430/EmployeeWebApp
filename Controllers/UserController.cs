@@ -40,6 +40,18 @@ namespace Employewebapp.Controllers
 
             return View("/Views/UserManagement/ManageRole.cshtml");
         }
+        
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _context.Users.Find(id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("UserList");
+        }
+
 
         // POST: /User/ManageRole
         [HttpPost]

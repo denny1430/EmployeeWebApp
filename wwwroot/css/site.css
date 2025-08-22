@@ -98,6 +98,46 @@ body {
             background-color: var(--primary-color);
             color: var(--text-dark);
         }
+    /* Submenu container (under Home) */
+    .sidebar .submenu {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        padding-left: 18px; /* indent under Home */
+    }
+
+        /* Submenu items (Privacy, About) */
+        .sidebar .submenu .sub-link {
+            font-size: 11px; /* ?? very small text */
+            padding: 2px 8px; /* ?? compact size */
+            background: none !important;
+            color: #aaa !important;
+            border: none;
+            display: block;
+            line-height: 1.2;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+            /* hover effect */
+            .sidebar .submenu .sub-link:hover {
+                background: #495057;
+                color: #fff !important;
+            }
+
+            /* active submenu */
+            .sidebar .submenu .sub-link.active {
+                background: #0d6efd;
+                color: #fff !important;
+            }
+
+            /* optional: arrow before submenu */
+            .sidebar .submenu .sub-link::before {
+                content: "›";
+                font-size: 9px;
+                margin-right: 4px;
+                color: #888;
+            }
+
 
 /* Main content area */
 .layout-wrapper {
