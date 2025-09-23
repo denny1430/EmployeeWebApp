@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public int Phone { get; set; }
         public int Salary { get; set; }
-
+        public string Department {  get; set; }
+        
     }
 }
